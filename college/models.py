@@ -11,7 +11,7 @@ class Staff(models.Model):
     photo = models.ImageField(upload_to='staff/')
     phone_number = models.IntegerField()
     last_active = models.TimeField(auto_now=True)
-    type = models.IntegerField()
+    Staff_type = models.IntegerField()
     gender = models.TextField(max_length=1,default='')
 
 
@@ -21,7 +21,6 @@ class Department(models.Model):
     dep_hod = models.ForeignKey(Staff,on_delete=models.CASCADE,related_name='staff')
 
 class Student(models.Model):
-
     student_id=models.AutoField(primary_key=True)
     stud_fname = models.CharField(max_length=50)
     stud_lname = models.CharField(max_length=50)
