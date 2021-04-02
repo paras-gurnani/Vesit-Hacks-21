@@ -37,6 +37,10 @@ class Place(models.Model):
     place_name = models.CharField(max_length=50)
     capactiy = models.IntegerField()
 
-
+class Committee(models.Model):
+    committee_id = models.AutoField(primary_key=True)
+    comm_name = models.CharField(max_length=50)
+    comm_level = models.CharField(max_length=30)
+    comm_head = models.ForeignKey(Student,related_name='student',on_delete=models.CASCADE)
 
 
