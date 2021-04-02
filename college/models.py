@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+<<<<<<< HEAD
 
 
 class Staff(models.Model):
@@ -14,7 +15,7 @@ class Staff(models.Model):
     photo = models.ImageField(upload_to='college/staff/')
     phone_number = models.IntegerField()
     last_active = models.TimeField(auto_now=True)
-    type = models.IntegerField()
+    Staff_type = models.IntegerField()
     gender = models.TextField(max_length=1,default='')
 
 
@@ -25,10 +26,16 @@ class Department(models.Model):
     print(dep_hod)
 
 class Student(models.Model):
+<<<<<<< HEAD
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # student_id=models.AutoField(primary_key=True)
     # stud_fname = models.CharField(max_length=50)
     # stud_lname = models.CharField(max_length=50)
+=======
+    student_id=models.AutoField(primary_key=True)
+    stud_fname = models.CharField(max_length=50)
+    stud_lname = models.CharField(max_length=50)
+>>>>>>> 734480862532b7d3629fcf51fb7fc506850ed974
     dept_id = models.ForeignKey(Department,on_delete=models.CASCADE,related_name='department',default='')
     is_privileged = models.BooleanField(default=False)
     # stud_email = models.EmailField(default='')
