@@ -11,3 +11,6 @@ def addEvent(request):
 def storeEvent(request):
     print(request.POST)
     return HttpResponse('Event Storage')
+
+def eventDetail(request):
+    return render(request, 'events/eventDetails.html')

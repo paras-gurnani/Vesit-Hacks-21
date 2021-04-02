@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+<style>
+#postor {
+    height: 400px;
+    width: 400px;
+    object-fit: contain;
+    margin: auto;
+}
+</style>
+
+{% endblock head %}
+
+{% block body %}
+    <div class="fluid container my-5">
+        <div class="row">
+            <div class="col">
+                <img id="postor" src="{% static 'img/SampleImage.png' %}" alter="Postor"> </img>
+            </div>
+            <div class="col my-auto">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                reprehenderit cum facere? Vel, incidunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                reprehenderit cum facere? Vel, incidunt.
+
+                <!-- Buttons -->
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-primary" id="know_more"> Know More </button>
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-success" id="register"> Register </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">    
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Event Title</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                            reprehenderit cum facere? Vel, incidunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
+                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
+                            reprehenderit cum facere? Vel, incidunt.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Register</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $("#know_more").click(function() {
+        $("#myModal").modal('show');
+    });
+</script>
+{% endblock body %}
