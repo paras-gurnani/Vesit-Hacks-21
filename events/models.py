@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Event(models.Model):
+    event_title = models.CharField(max_length = 50, default="")
     event_description = models.CharField(max_length = 100)
     # event_start
     event_time = models.TimeField()
@@ -10,9 +11,9 @@ class Event(models.Model):
     end_time = models.TimeField()
     end_date = models.DateField()
     #organizer:
-    is_student_or_staff = models.BooleanField() # True: STUDENT, False: STAFF
+    is_student = models.BooleanField() # True: STUDENT, False: STAFF
     # registration_link
     registration_link = models.CharField(max_length = 100)
     # postor
     postor = models.ImageField(upload_to = 'Events/Postors', default="")
-    
+
