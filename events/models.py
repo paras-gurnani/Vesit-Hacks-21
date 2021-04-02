@@ -18,15 +18,19 @@ class Event(models.Model):
     # postor
     postor = models.ImageField(upload_to = 'Events/Postors', default="")
     #Foreign Keys
+
     event_place = models.ForeignKey(mod.Place, on_delete=models.CASCADE)
-    dept_id = models.ForeignKey(mod.Department,on_delete=models.CASCADE)
-    approval_id  = models.ForeignKey(mod.Staff,on_delete=models.CASCADE)
+
+
+    dept_id = models.ForeignKey(mod.Department,on_delete=models.CASCADE,default=False)
+    approval_id  = models.ForeignKey(mod.Staff,on_delete=models.CASCADE,default=False)
+    event_type = models.IntegerField()
     #setting conductor id
     conductor_id=None
     if(is_student):
-        conductor_id = models.ForeignKey(mod.Student,on_delete=models.CASCADE)
+        conductor_id = models.ForeignKey(mod.Student,on_delete=models.CASCADE,default=False)
     else:
-        conductor_id = models.ForeignKey(mod.Staff,on_delete=models.CASCADE)
+        conductor_id = models.ForeignKey(mod.Staff,on_delete=models.CASCADE,default=False)
 
 
 
