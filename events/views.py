@@ -4,3 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     return HttpResponse('Events page')
+
+def addEvent(request):
+    return HttpResponse('Add Event')
