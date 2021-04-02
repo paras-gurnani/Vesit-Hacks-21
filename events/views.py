@@ -6,4 +6,8 @@ def index(request):
     return HttpResponse('Events page')
 
 def addEvent(request):
-    return HttpResponse('Add Event')
+    return render(request, 'events/add_events.html')
+
+def storeEvent(request):
+    print(request.POST)
+    return HttpResponse('Event Storage')

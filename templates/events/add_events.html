@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <!-- CDN -->
+  <script
+    type="text/javascript"
+    src='https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js'
+    referrerpolicy="origin">
+  </script>
+
+  <style>
+    textarea.tinyMCE {
+        width: 100% !important;
+    }
+
+    @media only screen and (min-width: 600px) {
+        textarea.richEditor {
+            width: 600px !important;
+        }
+    }
+  </style>
+
+  <!-- API CALL -->
+  <script type="text/javascript">
+  tinymce.init({
+    selector: '#description',
+    height: 300,
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'table emoticons template paste help'
+    ],
+    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+      'bullist numlist outdent indent | link image | print preview media fullpage | ' +
+      'forecolor backcolor emoticons | help',
+    menu: {
+      favs: {title: 'My Favorites', items: 'code visualaid | searchreplace | spellchecker | emoticons'}
+    },
+    menubar: 'favs file edit view insert format tools table help',
+    content_css: 'css/content.css'
+  });
+  </script>
+{% endblock head %}
+
+{% block body %}
+    <div class="container">
+        <h1> Add Events </h1>
+        <form action='/events/StoreEvent/' method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <div class="mb-3">
+                <h4><label for="Title" class="form-label">Title</label></h4>
+                <input type="text" class="form-control" id="Title">
+            </div>
+            <div class="mb-3">
+                <h4><label for="Title" class="form-label">Description</label></h4>
+                <textarea id="description" name="description" cols="100"></textarea>
+            </div>
+
+            <!-- Schedule -->
+            <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <h4> Start of event </h4>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">Start Date</label>
+                            <input type="date" id="start_date" name="start_date" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="start_time" class="form-label">Start Time</label>
+                            <input type="time" id="start_time" name="start_time" />
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <h4> End of event </h4>
+                        <div class="mb-3">
+                            <label for="start_date" class="form-label">End Date</label>
+                            <input type="date" id="end_date" name="end_date" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_time" class="form-label">End Time</label>
+                      1      <input type="time" id="end_time" name="end_time" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- is student or faculty-->
+                <br />
+                <h4> Organizer </h4>
+                <input type="radio" id="student" name="organizer" value="0">
+                <label for="student">Student</label><br>
+                <input type="radio" id="faculty" name="organizer" value="1">
+                <label for="female">Faculty</label><br>
+
+                <!-- Registration Link -->
+                <br />
+                <div class="mb-3">
+                    <h4><label for="Registration" class="form-label">Registration Link</label></h4>
+                    <input type="text" class="form-control" id="Registration">
+                </div>
+
+                <!-- Upload a postor -->
+                <input type="file" id="myFile" name="filename">
+                <br />
+                <br />
+                <button justify-content="center" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+
+        {% comment %} <form action='/events/StoreEvent' method="GET">
+            
+            <button id="bt" type="submit">submit</button>
+        </form> {% endcomment %}
+    </div>
+
+    {% comment %} <script>
+
+        $("#bt").click((event) => {
+            event.preventDefault();
+            alert('clicked');
+            console.log(tinyMCE.get('myTextarea').getContent())
+        })
+    </script> {% endcomment %}
+{% endblock body %}
