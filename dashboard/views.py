@@ -37,7 +37,7 @@ def login(request):
             request.session['user_email'] = user_details.staff_email
             request.session['user_fname'] = user_details.staff_fname
             request.session['dept_id'] = user_details.dept_id.dept_id
-            request.session['staff_type'] = user_details.Staff_type
+            request.session['Staff_type'] = user_details.Staff_type
         except Exception:
             user_details = None
 
@@ -68,6 +68,9 @@ def logout(request):
         del request.session['is_authenticated']
         del request.session['is_priviledged']
         del request.session['user_id']
+        del request.session['user_email']
+        del request.session['user_fname']
+        del request.session['Staff_type']
         return redirect('/events')
     else:
         return render(request, '/events/add_events.html')
