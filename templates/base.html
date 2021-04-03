@@ -9,40 +9,65 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
-    {% block head %}
-
-    {% endblock head %}
-
+    <style>
+      a {
+        color: white;
+      }
+      .navbar-brand {
+        font-family: 'Microsoft Sans Serif';
+        font-weight: bold;
+      }
+      .btn-style {
+        border: 2px solid #009bd9;
+        border-radius: 30px;
+        color: white;
+      }
+      .btn-style:hover {
+        background: white;
+        color: black;
+      }
+      a:hover{
+        color: white;
+        text-decoration: underline;
+      }
+      .active{
+        border-bottom: 3px solid white;
+      }
+      </style>
+      {% block head %}
+      {% endblock head %}  
     <title>{% block title %} {% endblock title %}</title>
   </head>
   <body>
+    {% block aboveNavBar %}
+    
+    {% endblock aboveNavBar %}
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">VESIT</a>
+    <nav class="navbar navbar-expand-lg" style="background: #36517e; color: white;">
+        <a class="navbar-brand my-3" href="/">VESIT</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item {% block eventsActive %} {% endblock %}">
+            <li class="nav-item {% block homeActive %} {% endblock %}">
+              <a class="nav-link" href="/events/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {% block upcomingActive %} {% endblock %}">
               <a class="nav-link" href="/events/">Upcoming Events<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item {% block homeActive %} {% endblock %}">
+            <li class="nav-item {% block ongoingActive %} {% endblock %}">
               <a class="nav-link" href="/events/ongoingevents">Ongoing Events<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item {% block aboutActive %} {% endblock %}">
+            <li class="nav-item {% block previousActive %} {% endblock %}">
               <a class="nav-link" href="/events/previousevents">Previous Events</a>
             </li>
           </ul>
           {% if request.session.is_authenticated and request.session.is_priviledged %}
             <a href="/events/ApproveEvent" class="nav-link"> Approvals </a>
           {% endif %}
-          <form action="/search" method="get" class="form-inline my-2 my-lg-0">
-            <input name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Search</button>
-          </form>
+
           {% if request.session.is_authenticated %}
             <!-- Example single danger button -->
             <div class="btn-group">
@@ -54,7 +79,7 @@
               </div>
             </div>
           {% else %}
-            <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
+            <button type="button" class="btn btn-style mr-2 " data-toggle="modal" data-target="#loginModal">
               Log in
             </button>
           {% endif %}
