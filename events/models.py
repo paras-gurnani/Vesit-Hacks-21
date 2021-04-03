@@ -4,7 +4,7 @@ from college import models as mod
 class Event(models.Model):
 
     event_title = models.CharField(max_length = 50, default="")
-    event_description = models.CharField(max_length = 100)
+    event_description = models.CharField(max_length = 500)
     # event_start
     event_time = models.TimeField()
     event_date = models.DateField()

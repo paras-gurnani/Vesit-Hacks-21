@@ -34,6 +34,9 @@ def login(request):
             request.session['is_authenticated'] = True
             request.session['is_priviledged'] = True
             request.session['user_id'] = user_details.staff_id
+            request.session['user_email'] = user_details.staff_email
+            request.session['user_fname'] = user_details.staff_fname
+            request.session['dept_id'] = user_details.dept_id
         except Exception:
             user_details = None
 
@@ -44,6 +47,9 @@ def login(request):
                 request.session['is_authenticated'] = True
                 request.session['is_priviledged'] = True
                 request.session['user_id'] = user_details.student_id
+                request.session['user_email'] = user_details.stud_email
+                request.session['user_fname'] = user_details.stud_fname
+                request.session['dept_id'] = user_details.dept_id.dept_id
             except Exception:
                 user_details = None
 
@@ -55,12 +61,13 @@ def login(request):
         return HttpResponse('You are already logged in')
 
 def logout(request):
+    print(dict(request.session))
     if request.session.__contains__('is_authenticated'):
         del request.session['is_authenticated']
         del request.session['is_priviledged']
         del request.session['user_id']
         return HttpResponse('Logged out')
     else:
-        return redirect('/events/AddEvents')
+        return render(request, '/events/add_events.html')
 
     
