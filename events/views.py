@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Event
+from .models import Event,EventPhoto
 from college.models import *
 from datetime import datetime,date,time
 
@@ -78,17 +78,30 @@ def storeEvent(request):
 def eventDetail(request, id):
     today_date = date.today()
     event = Event.objects.get(id=id)
+    photos = None
+    if event.event_date < today_date:
+       photos = EventPhoto.objects.all().filter(event=event)
+    uploadable=False
+    print(f'id and cond id:{id}  {event.conductor_id}')
+    if(id==event.conductor_id.student_id ):
+        uploadable=True
+    print(f'uploadable : {uploadable}')
+    print(f'photos : {photos}')
     context = {
+        'event_id':id,
         'event_title': event.event_title,
         'event_description': event.event_description,
         'registration_link': event.registration_link,
         'start_date' : event.event_date,
         'start_time' : event.event_time,
         'end_date' : event.end_date,
+        'cond_id' : event.conductor_id,
         'end_time' : event.end_time,
         'event_place' : event.event_place,
         'event_postor': event.postor,
-        'is_this_previous': True if event.event_date < today_date else False
+        'is_this_previous': True if event.event_date < today_date else False,
+        'uploadable':  uploadable,
+        'photos' : photos
     }
     print(context)
     return render(request, 'events/eventDetails.html', context)
@@ -99,8 +112,9 @@ def eventDetail(request, id):
 def previousEvents(request):
     context = {}
     today_date = date.today()
-    previous_events = Event.objects.all().filter(event_date__lt=today_date,status=1)
+    previous_events = Event.objects.all().filter(event_date__lt=today_date,status=1) 
     context['events'] = previous_events
+    context['status'] = 'previous'
     return render(request,'events/previousEvents.html',context=context)
 
 def onGoingEvents(request):
@@ -109,7 +123,6 @@ def onGoingEvents(request):
     ongoing_events = Event.objects.all().filter(event_date__lte=today_date, end_date__gte=today_date,status=1)
     context['events']=ongoing_events
     return render(request,'events/ongoing.html',context=context)
-
     
 def approveEvent(request):
     # status: 0 ---> Pending
@@ -117,7 +130,7 @@ def approveEvent(request):
     # status: 2 ---> Rejected
     staff_type = request.session['Staff_type']
     context = {}
-    print('--------------', staff_type)
+    print('Approve Event--------------', staff_type)
     if staff_type > 0:
         if staff_type == 3:
             pending_approvals = Event.objects.all().filter(status=0, event_type = staff_type)
@@ -138,7 +151,7 @@ def approveEvent(request):
                         'accepted_approvals': accepted_approvals,
                         'rejected_approvals': rejected_approvals
                         }
-
+    print(context)
     return render(request, 'events/give_approval.html', context)
 
 def approve(request, id):
@@ -160,3 +173,14 @@ def reject(request, id):
     event_object.approval_id = Staff.objects.get(staff_id = user_id)
     event_object.save(update_fields = ['status', 'approval_id'])
     return redirect('/events/ApproveEvent')
+
+def Storephotos(request,id):
+    print(request.FILES['photos'])
+    event = Event.objects.all().filter(id=id)[0]
+    # print(event)
+    
+    eventphoto = EventPhoto()
+    eventphoto.event = event
+    eventphoto.photo = request.FILES['photos']
+    eventphoto.save()
+    return redirect('/events/previousevents')

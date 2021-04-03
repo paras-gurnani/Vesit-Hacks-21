@@ -28,6 +28,16 @@
                 <!-- Buttons -->
                 <div class="container my-4">
                     <div class="row">
+                        <!-- <h1>{{event_id}}</h1> -->
+                        {%if is_this_previous and uploadable %}
+                            <form enctype='multipart/form-data' method="POST" action='/events/Storephotos/{{event_id}}'>
+                                <div class="col">
+                                    {% csrf_token %}
+                                    <input class="btn " name='photos' type='file' value='Upload Images' style='width:250px'> 
+                                    <button class='btn btn-warning' type='submit' href= /events/Storephotos/{{event.id}}>Upload</button>
+                                </div>
+                            </form>
+                        {% endif %}
                         <div class="col">
                             <button class="btn btn-primary" id="know_more"> Know More </button>
                         </div>
@@ -41,6 +51,18 @@
             </div>
         </div>
     </div>
+
+    <div class = container style='border: 2px black; width:100%;'>
+        {%if photos %}
+        <h2>Event Gallery</h2>
+            {% for photo in photos %}
+            <div style=' margin-left:auto; margin-right: auto; display: inline-flex; padding-right: 10px; border: 5px; border-color: black;'>
+                <img src='../../media/{{photo.photo}}'>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
     <div class="container">
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">

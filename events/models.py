@@ -37,3 +37,11 @@ class Event(models.Model):
     def __str__(self):
         return self.event_title
 
+class EventPhoto(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    photo = models.ImageField( upload_to='Events/EventPhotos')
+
+    def __str__(self):
+        return self.event.event_title
+    
+
