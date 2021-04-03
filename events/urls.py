@@ -8,5 +8,7 @@ urlpatterns = [
     path('AddEvent/', views.addEvent, name='add_event'),
     path('StoreEvent/', views.storeEvent, name='store_event'),
     path('EventDetail/<int:id>', views.eventDetail, name='event_detail'),
-    path('ApproveEvent', views.approveEvent, name='approve_event')
+    path('ApproveEvent', views.approveEvent, name='approve_event'),
+    path('Approve/<int:id>', views.approve, name="approve"),
+    path('Reject/<int:id>', views.reject, name="reject")
 ]

@@ -89,15 +89,48 @@ def approveEvent(request):
     # status: 0 ---> Pending
     # status: 1 ---> Accept
     # status: 2 ---> Rejected
-    staff_type = request.session['staff_type']
+    staff_type = request.session['Staff_type']
     context = {}
+    print('--------------', staff_type)
     if staff_type > 0:
-        pending_approvals = Event.objects.all().filter(status=0, event_type = staff_type)
-        accepted_approvals = Event.objects.all().filter(status=1, event_type = staff_type)
-        rejected_approvals = Event.objects.all().filter(status=2, event_type = staff_type)
-        context = {
-                    'pending_approvals': pending_approvals,
-                    'accepted_approvals': accepted_approvals,
-                    'rejected_approvals': rejected_approvals
-                    }
+        if staff_type == 3:
+            pending_approvals = Event.objects.all().filter(status=0, event_type = staff_type)
+            accepted_approvals = Event.objects.all().filter(status=1, event_type = staff_type)
+            rejected_approvals = Event.objects.all().filter(status=2, event_type = staff_type)
+            context = {
+                        'pending_approvals': pending_approvals,
+                        'accepted_approvals': accepted_approvals,
+                        'rejected_approvals': rejected_approvals
+                        }
+        else:
+            dept_object = Department.objects.get(dept_id = request.session['dept_id'])
+            pending_approvals = Event.objects.all().filter(status=0, event_type = staff_type, dept_id = dept_object)
+            accepted_approvals = Event.objects.all().filter(status=1, event_type = staff_type, dept_id = dept_object)
+            rejected_approvals = Event.objects.all().filter(status=2, event_type = staff_type, dept_id = dept_object)
+            context = {
+                        'pending_approvals': pending_approvals,
+                        'accepted_approvals': accepted_approvals,
+                        'rejected_approvals': rejected_approvals
+                        }
+
     return render(request, 'events/give_approval.html', context)
+
+def approve(request, id):
+    print('Approval ---- ', id)
+    event_object = Event.objects.get(id=id, status=0)
+    event_object.status = 1
+
+    user_id = request.session['user_id']
+    event_object.approval_id = Staff.objects.get(staff_id = user_id)
+    event_object.save(update_fields = ['status', 'approval_id'])
+    return redirect('/events/ApproveEvent')
+
+def reject(request, id):
+    print('Approval ---- ', id)
+    event_object = Event.objects.get(id=id, status=0)
+    event_object.status = 2
+
+    user_id = request.session['user_id']
+    event_object.approval_id = Staff.objects.get(staff_id = user_id)
+    event_object.save(update_fields = ['status', 'approval_id'])
+    return redirect('/events/ApproveEvent')
