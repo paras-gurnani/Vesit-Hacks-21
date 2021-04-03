@@ -70,6 +70,7 @@ def logout(request):
         del request.session['user_id']
         del request.session['user_email']
         del request.session['user_fname']
+        del request.session['dept_id']
         del request.session['Staff_type']
         return redirect('/events')
     else:

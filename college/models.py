@@ -70,7 +70,6 @@ class Committee(models.Model):
     comm_head = models.ForeignKey(Student, related_name='student', on_delete=models.CASCADE)
 
     def __str__(self):
-<<<<<<< HEAD
         return self.comm_name
 
 class StudentInCommittees(models.Model):
@@ -81,6 +80,3 @@ class StudentInCommittees(models.Model):
         return self.student.stud_fname
     
 
-=======
-        return self.comm_name
->>>>>>> dfc9d7cf57d4246a66b3b8c8b3325d099a17913b
