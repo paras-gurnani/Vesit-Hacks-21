@@ -86,4 +86,18 @@ def eventDetail(request, id):
     return render(request, 'events/eventDetails.html', context)
 
 def approveEvent(request):
-    return render(request, 'events/give_approval.html')
+    # status: 0 ---> Pending
+    # status: 1 ---> Accept
+    # status: 2 ---> Rejected
+    staff_type = request.session['staff_type']
+    context = {}
+    if staff_type > 0:
+        pending_approvals = Event.objects.all().filter(status=0, event_type = staff_type)
+        accepted_approvals = Event.objects.all().filter(status=1, event_type = staff_type)
+        rejected_approvals = Event.objects.all().filter(status=2, event_type = staff_type)
+        context = {
+                    'pending_approvals': pending_approvals,
+                    'accepted_approvals': accepted_approvals,
+                    'rejected_approvals': rejected_approvals
+                    }
+    return render(request, 'events/give_approval.html', context)
