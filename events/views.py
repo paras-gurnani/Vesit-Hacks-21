@@ -58,5 +58,13 @@ def storeEvent(request):
 
     return HttpResponse('Event Storage')
 
-def eventDetail(request):
-    return render(request, 'events/eventDetails.html')
+def eventDetail(request, id):
+    event = Event.objects.get(id=id)
+    context = {
+        'event_title': event.event_title,
+        'event_description': event.event_description,
+        'registration_link': event.registration_link,
+        'event_postor': event.postor
+    }
+    print(context)
+    return render(request, 'events/eventDetails.html', context)
