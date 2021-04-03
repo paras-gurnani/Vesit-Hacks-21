@@ -6,13 +6,14 @@
     <style>
         body {
             margin: 0;
+            background-color: #D3D3D3;
         }
         .upper-block {
-            background: #36517e;
+            background: black;
             color: white;
             text-align: center;
             font-family: 'Microsoft Sans Serif';
-            height: 75vh;
+            height: 90vh;
             margin-top: auto;
             margin-bottom: auto;
         }
@@ -39,7 +40,10 @@
 {% endblock head %}
 {% block aboveNavBar %}
     <div class="container-fluid upper-block">
-        <h1 class="align-middle heading-text"> VES Events </h1>
+        <h1 class="align-middle heading-text" data-aos="fade-down"> VES Events </h1>
+        <m data-aos-delay= "300" data-aos="zoom-in" data-aos-easing="ease">
+            <img class="img-fluid" src="{% static 'img/ves_logo_blck.png' %} "  style="width: 50vh; object-fit: contain;" /> 
+        </m>
     </div>
 {% endblock aboveNavBar %}
 
@@ -63,11 +67,11 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid my-2">
+    <div class="container-fluid my-2" style="padding: 3% 10%">
             <!-- Card -->
                 <div data-aos="fade-left" data-aos-duration="1000" class="row mx-2 p-2 my-card shadow-lg bg-white-rounded">
                     <div class="col-sm-6" >
-                        <img src="{% static 'img/SampleImage.png' %}" style="width: 60vh; object-fit: contain; border-radius: 5vh;" />
+                        <img src="{% static 'img/sample_events_logo.jpg' %}" style="width: 40vh; object-fit: contain; border-radius: 5vh;" />
                     </div>
                     <div class="col-sm-6 my-card-text">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt adipisci tempora amet eaque, expedita ab nemo vel culpa. Placeat sapiente nobis, itaque a eius dignissimos cumque quas ducimus fuga saepe.
@@ -76,7 +80,7 @@
             <!-- Card End -->
                 <div data-aos="fade-right" data-aos-duration="1000" class="row mx-2 p-2 my-card shadow-lg bg-white-rounded">
                     <div class="col-sm-6" >
-                        <img src="{% static 'img/SampleImage.png' %}" style="width: 60vh; object-fit: contain; border-radius: 5vh;" />
+                        <img src="{% static 'img/sample_events_logo.jpg' %}" style="width: 40vh; object-fit: contain; border-radius: 5vh;" />
                     </div>
                     <div class="col-sm-6 my-card-text">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt adipisci tempora amet eaque, expedita ab nemo vel culpa. Placeat sapiente nobis, itaque a eius dignissimos cumque quas ducimus fuga saepe.
@@ -84,7 +88,7 @@
                 </div>
                 <div data-aos="fade-left" data-aos-duration="1000" class="row mx-2 p-2 my-card shadow-lg bg-white-rounded">
                     <div class="col-sm-6" >
-                        <img src="{% static 'img/SampleImage.png' %}" style="width: 60vh; object-fit: contain; border-radius: 5vh;" />
+                        <img src="{% static 'img/sample_events_logo.jpg' %}" style="width: 40vh; object-fit: contain; border-radius: 5vh;" />
                     </div>
                     <div class="col-sm-6 my-card-text">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt adipisci tempora amet eaque, expedita ab nemo vel culpa. Placeat sapiente nobis, itaque a eius dignissimos cumque quas ducimus fuga saepe.
