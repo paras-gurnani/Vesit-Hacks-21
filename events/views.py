@@ -20,6 +20,7 @@ def index(request):
     upcoming_events = Event.objects.all().filter(event_date__gt = today_date)
     ongoing_events = Event.objects.all().filter(event_date__lte = today_date , end_date__gte = today_date)
 
+
     print(previous_events)
     print(upcoming_events)
     print(ongoing_events)
@@ -79,3 +80,17 @@ def storeEvent(request):
 
 def eventDetail(request):
     return render(request, 'events/eventDetails.html')
+
+def previousEvents(request):
+    context = {}
+    today_date = date.today()
+    previous_events = Event.objects.all().filter(event_date__lt=today_date)
+    context['events'] = previous_events
+    return render(request,'events/previousEvents.html',context=context)
+
+def onGoingEvents(request):
+    context={}
+    today_date = date.today()
+    ongoing_events = Event.objects.all().filter(event_date__lte=today_date, end_date__gte=today_date)
+    context['events']=ongoing_events
+    return render(request,'events/ongoing.html',context=context)

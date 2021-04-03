@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{%if events %}
+{%for event in events %}
+<div class="row" style="max-width:100%;">
+    <div class="col" style='display:inline-block; border: 2px solid yellow;'>
+      <div class="" style="max-width: 50%;margin-right:0px; display:inline-block;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src='/media/{{event.postor}}' height="200" width="175" alt="postor">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{event.event_title}}</h5>
+              <p class="card-text">{{event.event_description|safe }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%endfor%}
+  {%else%}
+  <h1>No events right now</h1>
+  {%endif%}
+</div>
+{% endblock body %}
