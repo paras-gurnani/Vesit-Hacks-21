@@ -18,7 +18,7 @@ class Staff(models.Model):
     gender = models.TextField(max_length=1,default='')
 
     def __str__(self):
-        return self.user.username
+        return self.staff_fname
 
 
 class Department(models.Model):
