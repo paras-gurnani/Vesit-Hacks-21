@@ -2,16 +2,28 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Event
 from college.models import *
+from datetime import datetime,date,time
 
 
 # Create your views here.
 def index(request):
     context={}
-    events = Event.objects.all()
-    for event in events:
-        print(event.event_description)
-        print(event.postor)
-    context['events'] = events
+    today = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+    today_date,today_time = today.split(' ')
+    hour,month,seconds = today_time.split(':')
+    today_time = datetime.strptime(today_time,'%H:%M:%S').time()
+    events = Event.objects.all().filter()
+    today_date = date.today()
+    # today_time= time.isoformat(timespec='auto')
+
+    previous_events = Event.objects.all().filter(event_date__lt = today_date)
+    upcoming_events = Event.objects.all().filter(event_date__gt = today_date)
+    ongoing_events = Event.objects.all().filter(event_date__lte = today_date , end_date__gte = today_date)
+
+    print(previous_events)
+    print(upcoming_events)
+    print(ongoing_events)
+    context['events'] = upcoming_events
     return render(request,'events/allEvents.html',context=context)
 
 def addEvent(request):
@@ -57,6 +69,7 @@ def storeEvent(request):
         dept_id = int(request.session['dept_id'])
         dept_object = Department.objects.get(dept_id = dept_id)
         event.dept_id = dept_object
+        event.status = 0
         event.save()
 
     return redirect('/events')
