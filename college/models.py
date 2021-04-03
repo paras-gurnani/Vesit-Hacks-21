@@ -2,6 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+class Department(models.Model):
+    dept_id = models.AutoField(primary_key=True)
+    dept_name = models.CharField(max_length=25)
+    
+    # print(dep_hod)
+
+    def __str__(self):
+        return self.dept_name
+
 
 class Staff(models.Model):
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -13,6 +22,7 @@ class Staff(models.Model):
     designation = models.CharField(max_length=20, default='')
     photo = models.ImageField(upload_to='college/staff/', null=True, blank=True)
     phone_number = models.IntegerField()
+    dept_id = models.ForeignKey(Department,on_delete=models.CASCADE,related_name='staff_dept_id',null=True,blank=True)
     last_active = models.TimeField(auto_now=True)
     Staff_type = models.IntegerField()
     gender = models.TextField(max_length=1,default='')
@@ -21,14 +31,6 @@ class Staff(models.Model):
         return self.staff_fname
 
 
-class Department(models.Model):
-    dept_id = models.AutoField(primary_key=True)
-    dept_name = models.CharField(max_length=25)
-    dep_hod = models.ForeignKey(Staff,on_delete=models.CASCADE)
-    # print(dep_hod)
-
-    def __str__(self):
-        return self.dept_name
 
 
 class Student(models.Model):
@@ -44,7 +46,7 @@ class Student(models.Model):
     gender = models.CharField(max_length=1,default='')
 
     def __str__(self):
-        return self.user.username
+        return self.stud_email
 
 class Place(models.Model):
     place_id = models.AutoField(primary_key=True)

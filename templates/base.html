@@ -41,17 +41,18 @@
             
           </ul>
           <form action="/search" method="get" class="form-inline my-2 my-lg-0">
+          {% csrf_token %}
             <input name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Search</button>
           </form>
-          {% if user.is_authenticated %}
+          {% if request.session.is_authenticated %}
             <!-- Example single danger button -->
             <div class="btn-group">
               <button type="button" class="btn btn-primary dropdown-toggle ml-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Welcome {{ request.user }}
+                Welcome {{ request.session.user_fname }}
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'dashboard: Logout' %}">Logout</a>
+                <a class="dropdown-item" href="{% url 'dashboard:logout' %}">Logout</a>
               </div>
             </div>
           {% else %}
