@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Event
 from college.models import *
@@ -6,7 +6,13 @@ from college.models import *
 
 # Create your views here.
 def index(request):
-    return HttpResponse('Events page')
+    context={}
+    events = Event.objects.all()
+    for event in events:
+        print(event.event_description)
+        print(event.postor)
+    context['events'] = events
+    return render(request,'events/allEvents.html',context=context)
 
 def addEvent(request):
     places_object = Place.objects.all()
@@ -40,8 +46,8 @@ def storeEvent(request):
             event.conductor_id = Staff.objects.get(staff_id = request.session['user_id'])
         else:
             event.conductor_id = Student.objects.get(student_id = request.session['user_id'])
-        # if request.FILES['filename']:
-        #     event.postor = request.FILES['filename']
+        if request.FILES['filename']:
+            event.postor = request.FILES['filename']
         event.registration_link = request.POST['registration']
         place_name = request.POST['place']
 
@@ -53,10 +59,7 @@ def storeEvent(request):
         event.dept_id = dept_object
         event.save()
 
-
-
-
-    return HttpResponse('Event Storage')
+    return redirect('/events')
 
 def eventDetail(request, id):
     event = Event.objects.get(id=id)
@@ -68,3 +71,6 @@ def eventDetail(request, id):
     }
     print(context)
     return render(request, 'events/eventDetails.html', context)
+
+def approveEvent(request):
+    return render(request, 'events/give_approval.html')

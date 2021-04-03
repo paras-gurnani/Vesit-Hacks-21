@@ -56,7 +56,7 @@ def login(request):
         if user_details is None:
             return HttpResponse('user not found')
         else:
-            return HttpResponse('Logged In')
+            return redirect('/events')
     else:
         return HttpResponse('You are already logged in')
 
@@ -66,7 +66,7 @@ def logout(request):
         del request.session['is_authenticated']
         del request.session['is_priviledged']
         del request.session['user_id']
-        return HttpResponse('Logged out')
+        return redirect('/events')
     else:
         return render(request, '/events/add_events.html')
 
