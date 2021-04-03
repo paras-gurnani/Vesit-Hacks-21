@@ -81,12 +81,6 @@ def eventDetail(request, id):
     photos = None
     if event.event_date < today_date:
        photos = EventPhoto.objects.all().filter(event=event)
-    uploadable=False
-    print(f'id and cond id:{id}  {event.conductor_id}')
-    if(id==event.conductor_id.student_id ):
-        uploadable=True
-    print(f'uploadable : {uploadable}')
-    print(f'photos : {photos}')
     context = {
         'event_id':id,
         'event_title': event.event_title,
@@ -100,7 +94,6 @@ def eventDetail(request, id):
         'event_place' : event.event_place,
         'event_postor': event.postor,
         'is_this_previous': True if event.event_date < today_date else False,
-        'uploadable':  uploadable,
         'photos' : photos
     }
     print(context)
