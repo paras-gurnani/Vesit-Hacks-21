@@ -65,7 +65,7 @@
             </li>
           </ul>
           {% if request.session.is_authenticated and request.session.is_priviledged %}
-            <a href="/events/ApproveEvent" class="nav-link"> Approvals </a>
+            <a href="/events/ApproveEvent" class="nav-link {% block activeApproval %}{% endblock activeApproval %}"> Approvals </a>
           {% endif %}
 
           {% if request.session.is_authenticated %}

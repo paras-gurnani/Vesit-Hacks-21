@@ -38,6 +38,7 @@ def login(request):
             request.session['user_fname'] = user_details.staff_fname
             request.session['dept_id'] = user_details.dept_id.dept_id
             request.session['Staff_type'] = user_details.Staff_type
+            request.session['is_student'] = False
         except Exception:
             user_details = None
 
@@ -52,6 +53,7 @@ def login(request):
                 request.session['user_fname'] = user_details.stud_fname
                 request.session['dept_id'] = user_details.dept_id.dept_id
                 request.session['Staff_type'] = 0 # for student
+                request.session['is_student'] = True
             except Exception:
                 user_details = None
 

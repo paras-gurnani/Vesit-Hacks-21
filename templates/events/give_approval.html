@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block activeApproval %} active {% endblock activeApproval %}
 {% block head %}
 <style>
     body {
@@ -13,10 +14,32 @@
     .approval-rejected {
         color: black;
     }
+    .wrapper {
+        display: flex;
+        width: 100%;
+        align-items: stretch;
+    }
+    #sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        min-height: 100vh;
+    }
+    #sidebar.active {
+        margin-left: -250px;
+    }
+    @media (max-width: 768px) {
+       #sidebar {
+            margin-left: -250px;
+        }
+        #sidebar.active {
+            margin-left: 0;
+        }
+    }
 </style>
 {% endblock head %}
 {% block body %}
-    {% if request.session.staff_type > 0 %}
+    <!-- ################################################# -->
+    {% if request.session.Staff_type > 0 %}
         <div class="container fluid">
             <div class="container approval-pending my-2">
                 <h3>Approvals Pending</h3>
@@ -160,7 +183,31 @@
             </div>
         </div>
     {% endif %}
+    <hr />
 
+    {% if request.session.is_student %}
+<!-- ###### Your Approvals ######-->
+    <div class="container my-3">
+        <h3>Your Pending Approvals</h3>
+        {% if yourPendingApprovals %}
+            {% for yourEvent in yourPendingApprovals %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>{{ yourEvent.event_title }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text" style="font-size: 1.2rem; ">{{ yourEvent.event_description|safe|truncatechars_html:100 }}</p>
+                            <br />
+                        </div>
+                    </div>
+            {% endfor %}
+        {% else %}
+            <h4>You haven't sent any application for approval</h4>
+        {% endif %}
+        
+    </div>
+<!-- ############################ -->
+    {% endif %}
 <!-- Script -->
 <script>
     $(".know_more").click(function(event) {
@@ -169,5 +216,15 @@
         target_event = Number(target_id.split("_")[2])
         $("#myModal_" + target_event).modal('show');
     })
+</script>
+
+<script>
+    $(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+
+});
 </script>
 {% endblock body %}

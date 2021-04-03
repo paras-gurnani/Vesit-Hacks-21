@@ -109,7 +109,7 @@ def onGoingEvents(request):
     ongoing_events = Event.objects.all().filter(event_date__lte=today_date, end_date__gte=today_date,status=1)
     context['events']=ongoing_events
     return render(request,'events/ongoing.html',context=context)
-    
+
 def approveEvent(request):
     # status: 0 ---> Pending
     # status: 1 ---> Accept
@@ -137,7 +137,15 @@ def approveEvent(request):
                         'accepted_approvals': accepted_approvals,
                         'rejected_approvals': rejected_approvals
                         }
+    
+    conductor_object = None
+    if request.session['is_student']:
+        conductor_object = Student.objects.get(student_id = request.session['user_id'])
+    else:
+        conductor_object = Staff.objects.get(staff_id = request.session['user_id'])
 
+    # yourPendingApprovals = Event.objects.all().filter(status = 0, conductor_id=conductor_object)
+    context['yourPendingApprovals'] = None
     return render(request, 'events/give_approval.html', context)
 
 def approve(request, id):
