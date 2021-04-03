@@ -25,6 +25,7 @@ class Event(models.Model):
     dept_id = models.ForeignKey(mod.Department,on_delete=models.CASCADE,null=True,blank=True)
     approval_id  = models.ForeignKey(mod.Staff,on_delete=models.CASCADE,null=True,blank=True)
     event_type = models.IntegerField()
+    committee_id = models.ForeignKey(mod.Committee, on_delete=models.CASCADE,null=True,blank=True  )
     status = models.IntegerField()
     #setting conductor id
     conductor_id=None
@@ -35,4 +36,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.event_title
+
+class EventPhoto(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    photo = models.ImageField( upload_to='Events/EventPhotos')
+
+    def __str__(self):
+        return self.event.event_title
+    
 

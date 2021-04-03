@@ -71,3 +71,12 @@ class Committee(models.Model):
 
     def __str__(self):
         return self.comm_name
+
+class StudentInCommittees(models.Model):
+    student = models.ForeignKey(Student,  on_delete=models.CASCADE)
+    committee = models.ForeignKey(Committee, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.student.stud_fname
+    
+
