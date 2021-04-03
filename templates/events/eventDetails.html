@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+<style>
+#postor {
+    height: 400px;
+    width: 400px;
+    object-fit: contain;
+    margin: auto;
+}
+</style>
+
+{% endblock head %}
+
+{% block body %}
+    <div class="fluid container my-5">
+        <h3 style="text-align: center;"> {{ event_title }} </h3>
+        <div class="row">
+            <div class="col">
+                <img id="postor" src="/media/{{ event_postor }}" alter="Postor"> </img>
+            </div>
+            <div class="col my-auto">
+                {{ event_description|safe }}
+
+                
+                <!-- Buttons -->
+                <div class="container my-4">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-primary" id="know_more"> Know More </button>
+                        </div>
+                        {% if not is_this_previous %}
+                            <div class="col">
+                                <button class="btn btn-success" id="register"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">    
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"> {{event_title}}</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            {{ event_description|safe }}
+                            <br>
+                            <a> <strong>Start Date : </strong> {{ start_date }} {{ start_time }} </a>
+                            <br>
+                            <a> <strong>End Date : </strong> {{ end_date }}{{ end_time }} </a>
+                            <br>
+                            <a> <strong> Place : </strong> {{event_place}} </a>
+
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        {% if not is_this_previous %}
+                            <button type="button" class="btn btn-success"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $("#know_more").click(function() {
+        $("#myModal").modal('show');
+    });
+</script>
+{% endblock body %}
