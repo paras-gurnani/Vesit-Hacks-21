@@ -105,7 +105,7 @@ def eventDetail(request, id):
 def previousEvents(request):
     context = {}
     today_date = date.today()
-    previous_events = Event.objects.all().filter(event_date__lt=today_date,status=1) 
+    previous_events = Event.objects.all().filter(end_date__lt=today_date,status=1) 
     context['events'] = previous_events
     context['status'] = 'previous'
     return render(request,'events/previousEvents.html',context=context)
