@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block upcomingActive %} active {% endblock upcomingActive %}
 {% block head %}
 <style>
   .addButton {
@@ -78,6 +78,14 @@
   .btn {
     margin-top: auto;
   }
+  .card-title {
+    font-family: 'Microsoft Sans Serif';
+    font-size: 5vh;
+    font-weight: bold;
+  }
+  .card-desc {
+    font-size: 5vh; 
+  }
 </style>
 
 {% endblock head %}
@@ -85,18 +93,17 @@
 {% block body %}
 
 {%if events %}
-<div class='container-fluid row' >
+<div class='container-fluid row mx-auto'>
   {%for event in events %}
-  <div class="card text-center" style='margin:auto; margin-top:2%;'>
+  <div class="card text-center mx-auto shadow-lg" style='margin:auto; margin-top:2%; width: 45%; border-radius: 20px;'>
     <div class="row">
-      <div class="col-sm-5">
-        <img class="d-block w-100" src='/media/{{event.postor}}' alt="">
+      <div class="col-sm-5 my-auto">
+        <img class="d-block w-100 mx-3" src='/media/{{event.postor}}' alt="" style="width: 20vh; border-radius: 2vh;">
       </div>
       <div class="col-sm-7">
         <div class="card-block">
-          <!--           <h4 class="card-title">Small card</h4> -->
-          <p>{{event.event_title}}</p>
-          <p>{{event.event_description|safe|truncatechars:50 }}</p>
+          <p class="card-title">{{event.event_title}}</p>
+          <p class="card-desc">{{event.event_description|safe|truncatechars:50 }}</p>
           <br>
           <br>
           <a href="/events/EventDetail/{{event.id}}" class="btn btn-primary">Know More</a>

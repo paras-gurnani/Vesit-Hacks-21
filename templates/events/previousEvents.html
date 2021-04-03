@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% block previousActive %} active {% endblock previousActive %}
 {% block head %}
   <style>
   .addButton {
@@ -41,7 +41,7 @@
 {%endfor%}
 </div>
   {%else%}
-  <h1>No events right now</h1>
+  <h3 class="mx-4 my-2">No events right now</h3>
   {%endif%}
 </div>
 
