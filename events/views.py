@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Event
 from college.models import *
@@ -58,8 +58,8 @@ def storeEvent(request):
             event.conductor_id = Staff.objects.get(staff_id = request.session['user_id'])
         else:
             event.conductor_id = Student.objects.get(student_id = request.session['user_id'])
-        # if request.FILES['filename']:
-        #     event.postor = request.FILES['filename']
+        if request.FILES['filename']:
+            event.postor = request.FILES['filename']
         event.registration_link = request.POST['registration']
         place_name = request.POST['place']
 
@@ -72,10 +72,32 @@ def storeEvent(request):
         event.status = 0
         event.save()
 
+    return redirect('/events')
 
+def eventDetail(request, id):
+    event = Event.objects.get(id=id)
+    context = {
+        'event_title': event.event_title,
+        'event_description': event.event_description,
+        'registration_link': event.registration_link,
+        'event_postor': event.postor
+    }
+    print(context)
+    return render(request, 'events/eventDetails.html', context)
 
-
-    return HttpResponse('Event Storage')
-
-def eventDetail(request):
-    return render(request, 'events/eventDetails.html')
+def approveEvent(request):
+    # status: 0 ---> Pending
+    # status: 1 ---> Accept
+    # status: 2 ---> Rejected
+    staff_type = request.session['staff_type']
+    context = {}
+    if staff_type > 0:
+        pending_approvals = Event.objects.all().filter(status=0, event_type = staff_type)
+        accepted_approvals = Event.objects.all().filter(status=1, event_type = staff_type)
+        rejected_approvals = Event.objects.all().filter(status=2, event_type = staff_type)
+        context = {
+                    'pending_approvals': pending_approvals,
+                    'accepted_approvals': accepted_approvals,
+                    'rejected_approvals': rejected_approvals
+                    }
+    return render(request, 'events/give_approval.html', context)

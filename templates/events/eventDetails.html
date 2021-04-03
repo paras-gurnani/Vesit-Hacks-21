@@ -16,27 +16,13 @@
 
 {% block body %}
     <div class="fluid container my-5">
+        <h3 style="text-align: center;"> {{ event_title }} </h3>
         <div class="row">
             <div class="col">
-                <img id="postor" src="{% static 'img/SampleImage.png' %}" alter="Postor"> </img>
+                <img id="postor" src="/media/{{ event_postor }}" alter="Postor"> </img>
             </div>
             <div class="col my-auto">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                reprehenderit cum facere? Vel, incidunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                reprehenderit cum facere? Vel, incidunt.
-
+                {{ event_description|safe }}
                 <!-- Buttons -->
                 <div class="container my-4">
                     <div class="row">
@@ -44,7 +30,7 @@
                             <button class="btn btn-primary" id="know_more"> Know More </button>
                         </div>
                         <div class="col">
-                            <button class="btn btn-success" id="register"> Register </button>
+                            <button class="btn btn-success" id="register"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
                         </div>
                     </div>
                 </div>
@@ -63,25 +49,11 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                            reprehenderit cum facere? Vel, incidunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                            reprehenderit cum facere? Vel, incidunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deserunt totam corrupti cupiditate
-                            doloremque accusantium tenetur nobis sequi ad, asperiores dignissimos nemo corporis odio, voluptas
-                            reprehenderit cum facere? Vel, incidunt.
+                            {{ event_description|safe }}
                         </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Register</button>
+                        <button type="button" class="btn btn-success"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
