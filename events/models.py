@@ -25,6 +25,7 @@ class Event(models.Model):
     dept_id = models.ForeignKey(mod.Department,on_delete=models.CASCADE,null=True,blank=True)
     approval_id  = models.ForeignKey(mod.Staff,on_delete=models.CASCADE,null=True,blank=True)
     event_type = models.IntegerField()
+    status = models.IntegerField()
     #setting conductor id
     conductor_id=None
     if(is_student):
