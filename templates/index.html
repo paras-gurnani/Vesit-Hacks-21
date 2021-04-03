@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block homeActive %}active{% endblock homeActive %}
+{% block head %}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        body {
+            margin: 0;
+        }
+        .upper-block {
+            background: #36517e;
+            color: white;
+            text-align: center;
+            font-family: 'Microsoft Sans Serif';
+            height: 75vh;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        .com-name {
+            text-align: center;
+            font-family: 'Lucida Handwriting';
+            font-weight: bold;
+            font-size: 7vh;
+        }
+        .heading-text {
+            padding-top: 2%;
+        }
+        .my-card {
+            border-radius: 40px;
+            margin-bottom: 5vh;
+            margin-top: 5vh;
+        }
+        .my-card-text {
+            font-family: 'Lucida Sans Typewriter';
+            margin: auto;
+            font-weight: bold;
+        }
+    </style>
+{% endblock head %}
+{% block aboveNavBar %}
+    <div class="container-fluid upper-block">
+        <h1 class="align-middle heading-text"> VES Events </h1>
+    </div>
+{% endblock aboveNavBar %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2 com-name mx-4">
+                E-Cell
+            </div>
+            <div class="col-sm-2 com-name">
+                IIC
+            </div>
+            <div class="col-sm-2 com-name">
+                CSI
+            </div>
+            <div class="col-sm-2 com-name">
+                IEEE
+            </div>
+            <div class="col-sm-2 com-name">
+                ISTE
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid my-2">
+            <!-- Card -->
+                <div data-aos="fade-left" data-aos-duration="1000" class="row mx-2 p-2 my-card shadow-lg bg-white-rounded">
+                    <div class="col-sm-6" >
+                        <img src="{% static 'img/SampleImage.png' %}" style="width: 60vh; object-fit: contain; border-radius: 5vh;" />
+                    </div>
+                    <div class="col-sm-6 my-card-text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt adipisci tempora amet eaque, expedita ab nemo vel culpa. Placeat sapiente nobis, itaque a eius dignissimos cumque quas ducimus fuga saepe.
+                    </div>
+                </div>
+            <!-- Card End -->
+                <div data-aos="fade-right" data-aos-duration="1000" class="row mx-2 p-2 my-card shadow-lg bg-white-rounded">
+                    <div class="col-sm-6" >
+                        <img src="{% static 'img/SampleImage.png' %}" style="width: 60vh; object-fit: contain; border-radius: 5vh;" />
+                    </div>
+                    <div class="col-sm-6 my-card-text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt adipisci tempora amet eaque, expedita ab nemo vel culpa. Placeat sapiente nobis, itaque a eius dignissimos cumque quas ducimus fuga saepe.
+                    </div>
+                </div>
+                <div data-aos="fade-left" data-aos-duration="1000" class="row mx-2 p-2 my-card shadow-lg bg-white-rounded">
+                    <div class="col-sm-6" >
+                        <img src="{% static 'img/SampleImage.png' %}" style="width: 60vh; object-fit: contain; border-radius: 5vh;" />
+                    </div>
+                    <div class="col-sm-6 my-card-text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt adipisci tempora amet eaque, expedita ab nemo vel culpa. Placeat sapiente nobis, itaque a eius dignissimos cumque quas ducimus fuga saepe.
+                    </div>
+                </div>
+    </div>
+
+    <!-- AOS Scripts-->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+{% endblock body %}
