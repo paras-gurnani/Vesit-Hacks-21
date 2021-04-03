@@ -109,6 +109,7 @@ def onGoingEvents(request):
     ongoing_events = Event.objects.all().filter(event_date__lte=today_date, end_date__gte=today_date,status=1)
     context['events']=ongoing_events
     return render(request,'events/ongoing.html',context=context)
+    
 def approveEvent(request):
     # status: 0 ---> Pending
     # status: 1 ---> Accept
