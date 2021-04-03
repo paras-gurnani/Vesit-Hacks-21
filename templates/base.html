@@ -41,7 +41,7 @@
             
           </ul>
           <form action="/search" method="get" class="form-inline my-2 my-lg-0">
-          {% csrf_token %}
+         
             <input name="query" id="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit">Search</button>
           </form>
@@ -75,7 +75,8 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="{% url 'dashboard:login' %}" method="POST"> {% csrf_token %}
+              <form action="{% url 'dashboard:login' %}" method="POST"> 
+              {% csrf_token %}
                 <div class="form-group">
                   <label for="username">Email</label>
                   <input type="text" class="form-control" id="username" name="useremail" required>

@@ -22,6 +22,7 @@ def addEvent(request):
 def storeEvent(request):
     # print(request.POST)
     if(request.method == 'POST'):
+        print(request.POST)
         event = Event()
         # Event details
         event.event_title = request.POST['title']
@@ -39,18 +40,17 @@ def storeEvent(request):
             event.conductor_id = Staff.objects.get(staff_id = request.session['user_id'])
         else:
             event.conductor_id = Student.objects.get(student_id = request.session['user_id'])
-
-        event.postor = request.FILES['filename']
+        # if request.FILES['filename']:
+        #     event.postor = request.FILES['filename']
         event.registration_link = request.POST['registration']
         place_name = request.POST['place']
 
         event.event_place = Place.objects.get(place_name=place_name)
         event.event_type = int(request.POST['level'])
-        event.dept_id = request.session['dept_id']
-        
-        
-
-        
+        print(request.session['dept_id'])
+        dept_id = int(request.session['dept_id'])
+        dept_object = Department.objects.get(dept_id = dept_id)
+        event.dept_id = dept_object
         event.save()
 
 
