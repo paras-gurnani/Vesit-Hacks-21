@@ -82,6 +82,11 @@ def eventDetail(request, id):
         'event_title': event.event_title,
         'event_description': event.event_description,
         'registration_link': event.registration_link,
+        'start_date' : event.event_date,
+        'start_time' : event.event_time,
+        'end_date' : event.end_date,
+        'end_time' : event.end_time,
+        'event_place' : event.event_place,
         'event_postor': event.postor,
         'is_this_previous': True if event.event_date < today_date else False
     }
