@@ -29,9 +29,11 @@
                         <div class="col">
                             <button class="btn btn-primary" id="know_more"> Know More </button>
                         </div>
-                        <div class="col">
-                            <button class="btn btn-success" id="register"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
-                        </div>
+                        {% if not is_this_previous %}
+                            <div class="col">
+                                <button class="btn btn-success" id="register"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -53,8 +55,10 @@
                         </p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        {% if not is_this_previous %}
+                            <button type="button" class="btn btn-success"><a href="https://{{ registration_link }}" style="color: white; text-decoration: none;">Register </a></button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        {% endif %}
                     </div>
                 </div>
             </div>

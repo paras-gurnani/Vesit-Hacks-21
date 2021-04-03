@@ -17,8 +17,9 @@ def index(request):
     # today_time= time.isoformat(timespec='auto')
 
     previous_events = Event.objects.all().filter(event_date__lt = today_date)
-    upcoming_events = Event.objects.all().filter(event_date__gt = today_date)
+    upcoming_events = Event.objects.all().filter(event_date__gt = today_date,status=1)
     ongoing_events = Event.objects.all().filter(event_date__lte = today_date , end_date__gte = today_date)
+
 
     print(previous_events)
     print(upcoming_events)
@@ -75,16 +76,34 @@ def storeEvent(request):
     return redirect('/events')
 
 def eventDetail(request, id):
+    today_date = date.today()
     event = Event.objects.get(id=id)
     context = {
         'event_title': event.event_title,
         'event_description': event.event_description,
         'registration_link': event.registration_link,
-        'event_postor': event.postor
+        'event_postor': event.postor,
+        'is_this_previous': True if event.event_date < today_date else False
     }
     print(context)
     return render(request, 'events/eventDetails.html', context)
 
+
+  
+
+def previousEvents(request):
+    context = {}
+    today_date = date.today()
+    previous_events = Event.objects.all().filter(event_date__lt=today_date,status=1)
+    context['events'] = previous_events
+    return render(request,'events/previousEvents.html',context=context)
+
+def onGoingEvents(request):
+    context={}
+    today_date = date.today()
+    ongoing_events = Event.objects.all().filter(event_date__lte=today_date, end_date__gte=today_date,status=1)
+    context['events']=ongoing_events
+    return render(request,'events/ongoing.html',context=context)
 def approveEvent(request):
     # status: 0 ---> Pending
     # status: 1 ---> Accept

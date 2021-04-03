@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-  <style>
+<style>
   .addButton {
     float: right;
     margin-right: 10%;
@@ -11,39 +11,110 @@
     font-weight: bold;
     font-size: 1rem;
   }
-  </style>
-  
+
+  body {
+    background-color: #eee;
+  }
+
+  .title {
+
+    margin-bottom: 50px;
+    text-transform: uppercase;
+  }
+
+  .card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid rgba(34, 36, 38, .1);
+    box-shadow: none;
+
+  }
+
+  .card {
+    font-size: 1em;
+    overflow: hidden;
+    padding: 5;
+    border: none;
+    border-radius: .28571429rem;
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    margin-top: 20px;
+  }
+
+  .carousel-indicators li {
+    border-radius: 12px;
+    width: 12px;
+    height: 12px;
+    background-color: #404040;
+  }
+
+  .carousel-indicators li {
+    border-radius: 12px;
+    width: 12px;
+    height: 12px;
+    background-color: #404040;
+  }
+
+  .carousel-indicators .active {
+    background-color: white;
+    max-width: 12px;
+    margin: 0 3px;
+    height: 12px;
+  }
+
+  .carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+  }
+
+  .carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+  }
+
+  lex-direction: column;
+  }
+
+  .btn {
+    margin-top: auto;
+  }
+</style>
+
 {% endblock head %}
 
 {% block body %}
 
 {%if events %}
-{%for event in events %}
-<div class="row container mx-auto" style="max-width:100%;">
-    <div class="col" style='display:inline-block;'>
-      <div class="row g-0" style="">
-        <div class="col-md-4">
-          <img src='/media/{{event.postor}}' height="400" width="275" style="object-fit: contain; margin: auto" alt="postor">
-        </div>
-        <div class="col-md-8 my-auto">
-          <div class="card-body text-center">
-            <h5 class="card-title event-title">{{event.event_title}}</h5>
-            <p class="card-text event-desc">{{event.event_description|safe }}</p>
-            <a href="/events/EventDetail/{{event.id}}" class="btn btn-primary">Know More</a>
+<div class='container-fluid row' >
+  {%for event in events %}
+  <div class="card text-center" style='margin:auto; margin-top:2%;'>
+    <div class="row">
+      <div class="col-sm-5">
+        <img class="d-block w-100" src='/media/{{event.postor}}' alt="">
+      </div>
+      <div class="col-sm-7">
+        <div class="card-block">
+          <!--           <h4 class="card-title">Small card</h4> -->
+          <p>{{event.event_title}}</p>
+          <p>{{event.event_description|safe|truncatechars:50 }}</p>
+          <br>
+          <br>
+          <a href="/events/EventDetail/{{event.id}}" class="btn btn-primary">Know More</a>
             <a href="{{event.registration_link}}" class="btn btn-success">Register</a>
-          </div>
         </div>
       </div>
     </div>
-  {%endfor%}
-  {%else%}
-  <h1>No events right now</h1>
-  {%endif%}
+  </div>
+{%endfor%}
+</div>
+{%else%}
+<h1>No events right now</h1>
+{%endif%}
 </div>
 
 {% if request.session.is_authenticated and request.session.is_priviledged %}
-  <div class="addEvent">
-    <a href="{% url 'events:add_event' %}" class="btn btn-primary addButton" type="submit">Add Event</a>
-  </div>
+<div class="addEvent">
+  <a href="{% url 'events:add_event' %}" class="btn btn-primary addButton" type="submit">Add Event</a>
+</div>
 {% endif %}
 {% endblock body %}
