@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <style>
+  .addButton {
+    float: right;
+    margin-right: 10%;
+    margin-bottom: 5%;
+    border-radius: 40px;
+    color: black;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  </style>
+
+{% endblock head %}
+
+{% block body %}
+
+{%if events %}
+<div class='container-fluid row' >
+  {%for event in events %}
+  <div class="card text-center" style='margin:auto; margin-top:2%;'>
+    <div class="row">
+      <div class="col-sm-5">
+        <img class="d-block w-100" src='/media/{{event.postor}}' alt="">
+      </div>
+      <div class="col-sm-7">
+        <div class="card-block">
+          <!--           <h4 class="card-title">Small card</h4> -->
+          <p>{{event.event_title}}</p>
+          <p>{{event.event_description|safe|truncatechars:50 }}</p>
+          <br>
+          <br>
+          <a href="/events/EventDetail/{{event.id}}" class="btn btn-primary">Know More</a>
+            {% comment %} <a href="{{event.registration_link}}" class="btn btn-success">Register</a> {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+{%endfor%}
+</div>
+  {%else%}
+  <h1>No events right now</h1>
+  {%endif%}
+</div>
+
+{% if request.session.is_authenticated and request.session.is_priviledged %}
+  <div class="addEvent">
+    <a href="{% url 'events:add_event' %}" class="btn btn-primary addButton" type="submit">Add Event</a>
+  </div>
+{% endif %}
+{% endblock body %}

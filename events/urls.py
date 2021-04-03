@@ -10,5 +10,7 @@ urlpatterns = [
     path('EventDetail/<int:id>', views.eventDetail, name='event_detail'),
     path('ApproveEvent', views.approveEvent, name='approve_event'),
     path('Approve/<int:id>', views.approve, name="approve"),
-    path('Reject/<int:id>', views.reject, name="reject")
+    path('Reject/<int:id>', views.reject, name="reject"),
+    path('previousevents/',views.previousEvents,name='previous_events'),
+    path('ongoingevents/',views.onGoingEvents,name='ongoing_events')
 ]

@@ -26,11 +26,14 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
+            <li class="nav-item {% block eventsActive %} {% endblock %}">
+              <a class="nav-link" href="/events/">Upcoming Events<span class="sr-only">(current)</span></a>
+            </li>
             <li class="nav-item {% block homeActive %} {% endblock %}">
-              <a class="nav-link" href="/">Ongoing Events<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/events/ongoingevents">Ongoing Events<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item {% block aboutActive %} {% endblock %}">
-              <a class="nav-link" href="/about">Previous Events</a>
+              <a class="nav-link" href="/events/previousevents">Previous Events</a>
             </li>
           </ul>
           {% if request.session.is_authenticated and request.session.is_priviledged %}
