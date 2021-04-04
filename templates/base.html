@@ -96,6 +96,7 @@
                 Welcome {{ request.session.user_fname }}
               </button>
               <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'dashboard:profile' %}">Profile</a>
                 <a class="dropdown-item" href="{% url 'dashboard:logout' %}">Logout</a>
               </div>
             </div>

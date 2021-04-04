@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block body %}
+    <div class="container-fluid" style="text-align: center;">
+        <h3> Profile </h3>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card row" style="height: 60vh;">
+                    {% if Photo %}
+                        <div class="col">
+                            <img class="card-img-top" src="/media/{{Photo}}" alt="Card image cap" style="width: 20vh;">
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ name }}</h5>
+                        <form enctype='multipart/form-data' method="POST" action='/dashboard/uploadProfilePic/'>
+                            <div class="col">
+                                {% csrf_token %}
+                                <input class="btn " name='photos' width='400' height="200" type='file' value='Upload Images' style='width:250px'> 
+                                <button class='btn btn-warning' type='submit' href= /events/Storephotos/{{event.id}}>Upload</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="card" style="width: 100%;">
+                    <div class="card-header" style="font-weight: bold;">
+                        Profile Details
+                    </div>
+                    <ul class="list-group list-group-flush" style="text-align: left;">
+                        <li class="list-group-item"><strong>Name: {{ name }}</strong></li>
+                        <li class="list-group-item"><strong>Email: {{ email }}</strong></li>
+                        <li class="list-group-item"><strong>Department: {{ department }}</strong></li>
+                        <li class="list-group-item"><strong>Designation: {{ Designation }}</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

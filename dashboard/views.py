@@ -74,8 +74,45 @@ def logout(request):
         del request.session['user_fname']
         del request.session['dept_id']
         del request.session['Staff_type']
+        del request.session['is_student']
         return redirect('/events')
     else:
         return render(request, '/events/add_events.html')
 
+def profile(request):
+    user_id = request.session['user_id']
+    if request.session['is_student']:
+        student_object = Student.objects.get(student_id = user_id)
+        context = {
+            'name': student_object.stud_fname + ' ' + student_object.stud_lname,
+            'email': student_object.stud_email,
+            'department': student_object.dept_id.dept_name,
+            'Designation': 'Student',
+            'Photo': student_object.stud_photo
+        }
+    else:
+        staff_object = Staff.objects.get(staff_id = user_id)
+        context = {
+            'name': staff_object.staff_fname + ' ' + staff_object.staff_lname,
+            'email': staff_object.staff_email,
+            'department': staff_object.dept_id.dept_name,
+            'Designation': staff_object.designation,
+            'Photo': staff_object.photo
+        }
+    print(context)
+    return render(request, 'dashboard/profile.html', context)
+
+def uploadProfilePic(request):
+    print(request.FILES['photos'])
+    user_object = None
+    if request.session['is_student']:
+        user_object = Student.objects.get(student_id = request.session['user_id'])
+        user_object.stud_photo = request.FILES['photos']
+        user_object.save(update_fields=['stud_photo'])
+    else:
+        user_object = Staff.objects.get(staff_id = request.session['user_id'])
+        user_object.photo = request.FILES['photos'] 
+        user_object.save(update_fields=['photo'])
+    
+    return redirect('/dashboard/profile')
     

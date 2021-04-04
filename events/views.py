@@ -185,4 +185,4 @@ def Storephotos(request,id):
     eventphoto.event = event
     eventphoto.photo = request.FILES['photos']
     eventphoto.save()
-    return redirect('/events/previousevents')
+    return redirect('/events/EventDetail/' + str(id))
